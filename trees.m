@@ -1,9 +1,13 @@
+%generate the tree structure for decoder
 function [tree_1,tree_2,tree_3] = trees(CW1,CW2,CW3,num_co,extra)
 %num_co = 8;
 
 [CW1,CW2,CW3]=codewords(num_co);
 %tree for order 1 
 [r,c]=size(CW1);
+% for each tree, node_max is needed to be well estimated.
+% for tree_1, it is trivial. take care when dealing with tree_2&3 since it
+% will easily go over the limitation of the size of cell in matlab.
 node_max = 2*num_co;
 tree_1 = cell(node_max,1);
 for i =1:r
@@ -17,6 +21,7 @@ for i =1:r
         end               
     end
 end
+% %gives a average num of measurements needed. 
 % L1 = zeros(r,1);
 % for i = 1:node_max
 %     if length(tree_1{i}) == 1 && L1(tree_1{i}) == 0
